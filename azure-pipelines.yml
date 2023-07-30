@@ -1,34 +1,50 @@
-# ASP.NET
-# Build and test ASP.NET projects.
-# Add steps that publish symbols, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
-
 trigger:
-- master
+  branches:
+    include:
+      - main  # Change this to the name of your main branch, e.g., master
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
+- task: UseDotNet@2
+  inputs:
+    version: '6.x'
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'restore'
+    restoreSolution: 'ClassLibraryProjects.sln'  # Change this to your solution file
 
 - task: VSBuild@1
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
+    solution: 'ClassLibraryProjects.sln'  # Change this to your solution file
+    platform: 'Any CPU'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'pack'
+    packagesToPack: 'ClassLibraryProjects/StringLibrary/StringLibrary.csproj'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'BuildVersion'
+    packDirectory: '$(build.artifactStagingDirectory)/nuget'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(build.artifactStagingDirectory)/nuget'
+    ArtifactName: 'nuget'
+
+- task: NuGetAuthenticate@0
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(build.artifactStagingDirectory)/nuget/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '<your-Azure-Artifacts-Feed-Name>'  # Replace with your Azure Artifacts Feed name
