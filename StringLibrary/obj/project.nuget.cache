@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "ochgBzq8wXn3mzqas3M+dXUqjpTJyasIC7V58pzyqxG0zpqaiCNHLNfRm/GYgUa+xT60zkeJgevQvZHfeFUdkQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\hemur\\source\\repos\\ClassLibraryProjects\\StringLibrary\\StringLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hemur\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.20\\microsoft.windowsdesktop.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\hemur\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.20\\microsoft.netcore.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\hemur\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.20\\microsoft.aspnetcore.app.ref.6.0.20.nupkg.sha512"
+  ],
+  "logs": []
+}
