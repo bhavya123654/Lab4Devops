@@ -9,6 +9,10 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  major: '1'
+  minor: '0'
+  revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
+  nugetVersion: '$(major).$(minor).$(revision)'
 
 steps:
 - task: UseDotNet@2
@@ -33,7 +37,8 @@ steps:
     command: 'pack'
     packagesToPack: 'StringLibrary/StringLibrary.csproj'
     packDirectory: '$(build.artifactStagingDirectory)/nuget'
-    versioningScheme: 'off'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'byEnvVar'
 # - task: DotNetCoreCLI@2
 #   inputs:
 #     command: 'pack'
