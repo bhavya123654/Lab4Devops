@@ -31,7 +31,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
-    packagesToPack: 'ClassLibraryProjects/StringLibrary/StringLibrary.csproj'
+    packagesToPack: 'StringLibrary/StringLibrary.csproj'
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'BuildVersion'
     packDirectory: '$(build.artifactStagingDirectory)/nuget'
