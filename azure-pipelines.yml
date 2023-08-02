@@ -34,13 +34,13 @@ steps:
     packagesToPack: 'StringLibrary/StringLibrary.csproj'
     packDirectory: '$(build.artifactStagingDirectory)/nuget'
     versioningScheme: 'byBuildNumber'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'pack'
-    packagesToPack: 'StringLibrary/StringLibrary.csproj'
-    packDirectory: '$(build.artifactStagingDirectory)/nuget'
-    versioningScheme: 'byEnvVar'
-    versionEnvVar: 'BuildVersion'
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: 'pack'
+#     packagesToPack: 'StringLibrary/StringLibrary.csproj'
+#     packDirectory: '$(build.artifactStagingDirectory)/nuget'
+#     versioningScheme: 'byEnvVar'
+#     versionEnvVar: 'BuildVersion'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(build.artifactStagingDirectory)/nuget'
@@ -53,4 +53,4 @@ steps:
     command: 'push'
     packagesToPush: '$(build.artifactStagingDirectory)/nuget/*.nupkg'
     nuGetFeedType: 'internal'
-    publishVstsFeed: '<your-Azure-Artifacts-Feed-Name>'  # Replace with your Azure Artifacts Feed name
+    publishVstsFeed: 'nuget-create'  # Replace with your Azure Artifacts Feed name
