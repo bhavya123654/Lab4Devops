@@ -53,4 +53,5 @@ steps:
     command: 'push'
     packagesToPush: '$(build.artifactStagingDirectory)/nuget/*.nupkg'
     nuGetFeedType: 'internal'
-    publishVstsFeed: 'nuget-create'  # Replace with your Azure Artifacts Feed name
+    publishVstsFeed: '818ac02d-2d52-4152-bfdc-096de293bfeb'
+    allowPackageConflicts: true
