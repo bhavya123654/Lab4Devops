@@ -32,10 +32,16 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: 'StringLibrary/StringLibrary.csproj'
+    packDirectory: '$(build.artifactStagingDirectory)/nuget'
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'BuildVersion'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'StringLibrary/StringLibrary.csproj'
     packDirectory: '$(build.artifactStagingDirectory)/nuget'
-
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'BuildVersion'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(build.artifactStagingDirectory)/nuget'
